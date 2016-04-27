@@ -1,0 +1,14 @@
+1 - Vai criar a imagem com a tag meu-inkscape baseada no Dockerfile do diretório atual
+sudo docker build -t meu-inkscape .
+2 - Para rodar algum comando de nossa imagem, -ti é shell interativo --rm apaga as alterações feitas na imagem
+docker run -ti --rm meu-inkscape
+3 - Dar acesso ao X11
+xhost +
+4 - Verificar qual o código do X11
+echo $DISPLAY
+5 - Rodar passando a variável de display e a config de display e uma pasta do seu pc que será acessivel de dentro do docker
+sudo docker run -ti --rm \
+-e "DISPLAY=unix${DISPLAY}" \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-v $HOME/Pictures:/home/player/Pictures \
+meu-inkscape
